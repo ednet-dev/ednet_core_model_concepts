@@ -5,6 +5,7 @@ class Board {
   // The board is redrawn every INTERVAL ms.
   static final int INTERVAL = 8; 
   
+  CanvasElement canvas;
   CanvasRenderingContext2D context;
   
   int width;
@@ -15,14 +16,16 @@ class Board {
   
   Box beforeLastBoxClicked;
   Box lastBoxClicked;
+  Box lastBoxSelected;
+  Line lastLineSelected;
   
   MenuBar menuBar; 
   ToolBar toolBar;
   
   num defaultLineWidth;
   
-  Board(CanvasElement canvas) {
-    context = canvas.getContext("2d");
+  Board(this.canvas) {
+    context = canvas.getContext('2d');
     width = canvas.width;
     height = canvas.height;
     defaultLineWidth = context.lineWidth;
@@ -61,6 +64,17 @@ class Board {
     for (Box box in boxes) {
       box.draw();
     }
+  }
+  
+  void printBoxNames() {
+    for (Box box in boxes) {
+      print(box.title);
+    }
+  }
+  
+  void saveAsPng() {
+    ImageElement modelImage = document.query('#modelImage');
+    modelImage.src = canvas.toDataURL("image/png");
   }
   
   void createBoxesInDiagonal() {
@@ -206,6 +220,56 @@ class Board {
     deselectLines();
   }
   
+  void increaseHeightOfSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.height = box.height + Box.DEFAULT_INCREMENT;
+      }
+    }
+  }
+  
+  void decreaseHeightOfSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.height = box.height - Box.DEFAULT_INCREMENT;
+      }
+    }
+  }
+  
+  void increaseWidthOfSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.width = box.width + Box.DEFAULT_INCREMENT;
+      }
+    }
+  }
+  
+  void decreaseWidthOfSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.width = box.width - Box.DEFAULT_INCREMENT;
+      }
+    }
+  }
+  
+  void increaseSizeOfSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.height = box.height + Box.DEFAULT_INCREMENT;
+        box.width = box.width + Box.DEFAULT_INCREMENT;
+      }
+    }
+  }
+  
+  void decreaseSizeOfSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.height = box.height - Box.DEFAULT_INCREMENT;
+        box.width = box.width - Box.DEFAULT_INCREMENT;
+      }
+    }
+  }
+  
   void hideSelectedBoxes() {
     for (Box box in boxes) {
       if (box.isSelected()) {
@@ -247,8 +311,6 @@ class Board {
     showHiddenBoxes();
     showHiddenLines();
   }
-  
-  int get nextBoxNo() => boxes.length + 1;
   
   int countSelectedBoxes() {
     int count = 0;
