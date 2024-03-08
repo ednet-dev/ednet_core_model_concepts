@@ -1,15 +1,3 @@
-/* page.css */
-
-/* ===[ begin ]=== */
-
-/*
-  Title:                   Web Page Design Style
-  Author:                  Dzenan Ridjanovic
-  Influenced By:           http://www.simplebits.com/
-  Created:                 2006-09-03
-  Updated:                 2011-12-23
-*/
-
   body {
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 16px;
@@ -17,7 +5,7 @@
     width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    padding:10px;
+    padding: 10px;
   }
 
   section {
@@ -31,5 +19,3 @@
     margin-right: 2px;
     background: #fefefe;
   }
-
-/* ===[ end ]=== */
