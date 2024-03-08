@@ -1,8 +1,8 @@
 part of model_concepts;
 
 class Board {
-  static const int MIN_WIDTH = 990;
-  static const int MIN_HEIGHT = 580;
+  static const int MIN_WIDTH = 3000;
+  static const int MIN_HEIGHT = 3000;
   static const int DEFAULT_LINE_WIDTH = 1;
   static const int DEFAULT_FONT_SIZE = 12;
   static const String DEFAULT_LINE_COLOR = '#000000'; // black
